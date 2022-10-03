@@ -5,19 +5,23 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
 import { deleteItems } from '../store/slice/cart.slice';
+import { menuCategories } from '../store/slice/menucategory.slice';
+import { menuPrices } from '../store/slice/menuprice.slice';
 
 const Home = () => {
 
     const dispatch = useDispatch();
     const menu = useSelector(state => state.menu);
+    const menuPrice = useSelector(state => state.menuprice);
+    const menucategory = useSelector(state => state.menucategory);
     const products = useSelector(state => state.products)
     const productsCart = useSelector(state => state.cart)
     const navigate = useNavigate()
     const [categories, setCtegories] = useState([]);
     const [productFiltered, setProductFilteres] = useState([]);
     const [searchValue, setSearchvalue] = useState([]);
-    const [ price, setPrice ] = useState("");
-    const [ price1, setPrice1 ] = useState("");
+    const [price, setPrice] = useState("");
+    const [price1, setPrice1] = useState("");
 
     useEffect(() => {
         axios.get('https://ecommerce-api-react.herokuapp.com/api/v1/products/categories')
@@ -53,39 +57,40 @@ const Home = () => {
             <div className='category'>
                 <button className='btn-deletefilter' onClick={() => vertest()}>borrar filtros</button>
                 <div className='filter-category'>
-                    <div className='filter-category-title'>
+                    <div className='filter-category-title' onClick={() => dispatch(menuCategories(!menucategory))}>
                         <p>Categories</p>
-                        <i class="fa-solid fa-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-down" style={menucategory === true ? {transform: 'rotate(180deg)'} : {transform: 'rotate(0deg)'}}></i>
                     </div>
+                    <div className={`con-filter-category-item ${ menucategory ? 'is-active-categories' : 'con-filter-category-item'}`}>
 
-                    {
-                        categories.map(category => (
-                            <div className='filter-category-item'>
-                                <p onClick={() => filterCategory(category.id)} key={category.id}>{category.name}</p>
-                            </div>
-                        ))
+                        {
+                            categories.map(category => (
+                                <div className='filter-category-item'>
+                                    <p onClick={() => filterCategory(category.id)} key={category.id}>{category.name}</p>
+                                </div>
+                            ))
 
-                    }
-
+                        }
+                    </div>
                 </div>
                 <div className='filter-price'>
-                    <div className='filter-category-price'>
+                    <div className='filter-category-price' onClick={() => dispatch(menuPrices(!menuPrice))}>
                         <p>Price</p>
-                        <i class="fa-solid fa-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-down" style={menuPrice === true ? {transform: 'rotate(180deg)'} : {transform: 'rotate(0deg)'}}></i>
                     </div>
-                    <div className='filter-price-input-all'>
+                    <div className={`filter-price-input-all ${menuPrice ? 'is-active-price' : ''}`}>
                         <div className='filter-price-input filter-price-input1'>
                             <label htmlFor="">From</label>
-                            <input type="number" value={price} onChange={e => setPrice(e.target.value)}/>
+                            <input type="number" value={price} onChange={e => setPrice(e.target.value)} />
                         </div>
                         <div className='filter-price-input'>
                             <label htmlFor="">To</label>
-                            <input type="number" value={price1} onChange={e => setPrice1(e.target.value)}/>
+                            <input type="number" value={price1} onChange={e => setPrice1(e.target.value)} />
                         </div>
                         <div className='filter-price-btn'>
                             <button onClick={() => searchProductsPrice()}>Filter price</button>
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -122,7 +127,7 @@ const Home = () => {
                     }
                 </div>
             </div>
-            <div className={`containe-cart ${ menu ?  'is-active' : ''}`}>
+            <div className={`containe-cart ${menu ? 'is-active' : ''}`}>
                 <div className='title-cart'>
                     <p>Carrito de compras</p>
                 </div>
@@ -131,27 +136,27 @@ const Home = () => {
                         productsCart.map(productc => (
                             <div key={productc.id} >
                                 <div className="container-item-cart-trash-category">
-                                   <p>{productc?.category.name}</p> 
-                                   <i class="fa-solid fa-trash" onClick={() => dispatch(deleteItems(productc.id))}></i>
+                                    <p>{productc?.category.name}</p>
+                                    <i class="fa-solid fa-trash" onClick={() => dispatch(deleteItems(productc.id))}></i>
                                 </div>
                                 <div className='container-item-cart-titel'>
                                     <p>{productc?.title}</p>
                                 </div>
                                 <div className='container-item-cart-quantify'>
-                                   <p>1</p> 
+                                    <p>1</p>
                                 </div>
                                 <div className='container-item-cart-price'>
                                     <spam>Total:</spam>
                                     <p>{productc?.price}</p>
                                 </div>
                             </div>
-                            
+
                         ))
                     }
                 </div>
+            </div>
         </div>
-        </div>
-        
+
     );
 };
 

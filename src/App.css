@@ -201,6 +201,7 @@ body {
     width: 25%;
     padding: 30px 30px 0 20px;
     z-index: 1;
+    height: 550px;
   }
 
   .category h3 {
@@ -222,7 +223,7 @@ body {
     font-weight: 600;
   }
 
-  .filter-category-title {
+  .filter-category-title{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -231,11 +232,24 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: var(--principal);
     font-weight: 600;
+    cursor: pointer;
   }
 
   .filter-category-item {
     color: black;
     padding: 0 15px;
+  }
+
+  .con-filter-category-item{
+    height: 0px;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+
+  .con-filter-category-item.is-active-categories{
+    opacity: 1;
+    height: 100px;
+    
   }
 
   .filter-category-item p {
@@ -490,6 +504,7 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: var(--principal);
     font-weight: 600;
+    cursor: pointer;
   }
 
   .filter-price-input {
@@ -512,6 +527,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    opacity: 0;
+    height: 0px;
+    transition: all 0.5s ease;
+  }
+
+  .filter-price-input-all.is-active-price {
+    opacity: 1;
+    height: 132px;
   }
 
   .filter-price-input1 {
@@ -873,6 +896,7 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: var(--principal);
     font-weight: 600;
+    cursor: pointer;
   }
 
   .filter-category-item {
@@ -1122,6 +1146,7 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: var(--principal);
     font-weight: 600;
+    cursor: pointer;
   }
 
   .filter-price-input {
@@ -1512,6 +1537,7 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: var(--principal);
     font-weight: 600;
+    cursor: pointer;
   }
 
   .filter-category-item {
@@ -1761,6 +1787,7 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: var(--principal);
     font-weight: 600;
+    cursor: pointer;
   }
 
   .filter-price-input {
@@ -2148,6 +2175,7 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: var(--principal);
     font-weight: 600;
+    cursor: pointer;
   }
 
   .filter-category-item {
@@ -2397,6 +2425,7 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: var(--principal);
     font-weight: 600;
+    cursor: pointer;
   }
 
   .filter-price-input {
