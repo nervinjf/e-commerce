@@ -1,10 +1,9 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { menuCart } from '../store/slice/menuCart.slice';
+import CartSideBar from './CartSideBar';
+import { useState } from 'react';
+
 
 const MyNavbar = () => {
 
@@ -12,30 +11,24 @@ const MyNavbar = () => {
   const dispatch = useDispatch();
   const menu = useSelector(state => state.menu);
   
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  
 
   return (
     <>
       <nav>
         <p onClick={() => navigate(`/`)}>e-commerce</p>
         <div className='container-i-nav'>
-          <i class="fa-solid fa-user" to="/login" onClick={() => navigate(`/login`)}></i>
-          <i class="fa-solid fa-box-archive" onClick={() => navigate(`/purchases`)}></i>
-          {/* <div className={`carrt `}> */}
-            <i class= "fa-solid fa-cart-shopping" onClick={() => dispatch(menuCart(!menu))}></i>
-          {/* </div> */}
-          
+          <i className="fa-solid fa-user" to="/login" onClick={() => navigate(`/login`)}></i>
+          <i className="fa-solid fa-box-archive" onClick={() => navigate(`/purchases`)}></i>
+          <i className="fa-solid fa-cart-shopping" onClick={handleShow}></i>
+
         </div>
       </nav>
-      {/* <Navbar bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand to="/" as={Link}>Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link to="/login" as={Link}>Logins</Nav.Link>
-            <Nav.Link to="/purchases" as={Link}>Purchases</Nav.Link>
-            <Nav.Link >Cart</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar> */}
+      <CartSideBar show={show} handleClose={handleClose}/>
     </>
   );
 };

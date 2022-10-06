@@ -1,8 +1,10 @@
 import { createNextState } from '@reduxjs/toolkit';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCart } from '../store/slice/cart.slice';
+// import { getCart } from '../store/slice/cart.slice';
 import { Navigate, useNavigate, useParams, Link } from 'react-router-dom'
+import CartSideBar from '../Components/CartSideBar';
+import { addCartThunk } from '../store/slice/cart.slice';
 
 const ProductsDetails = ({ quantifyCart }) => {
 
@@ -16,18 +18,26 @@ const ProductsDetails = ({ quantifyCart }) => {
     const [ number, setNumber ] = useState(0);
     const [ quantify, setQuantify ] = useState(1);
 
-    const addProductCart = (idItems) => {
-        dispatch(getCart(idItems));
-    }
+    // const addProductCart = (idItems) => {
+    //     dispatch(getCart(idItems));
+    // }
 
-    const quantifyNumber = () => {
-        quantifyCart(quantify)
+    useEffect(() => {
+        setQuantify(1)
+    }, [id])
+
+    const addCart = () => {
+        const cart = {
+            "id": id,
+            "quantity": quantify
+        }
+        dispatch(addCartThunk(cart));
     }
 
     return (
         <>
             <div className='container-info-products'>
-                <span onClick={() => navigate(-1)}>Home</span>
+                <span onClick={() => navigate("/")}>Home</span>
                 <i class="fa-solid fa-circle"></i>
                 <p>{productDetails?.title}</p>
             </div>
@@ -36,7 +46,7 @@ const ProductsDetails = ({ quantifyCart }) => {
                     <div className='container-description-carrusel-box1'>
                         <i class="fa-solid fa-chevron-left" onClick={() => setNumber(number - 1)} style={number === 0 ? { visibility: "hidden" } : { visibility: "visible" }}></i>
                         <div className='container-img-carrusel'>
-                            <img src={productDetails?.productImgs[number]} alt="" width={"340px"} height={"370px"} />
+                            <img src={productDetails?.productImgs[number]} alt="" width={"250px"} /* height={"370px"} */ />
                         </div>
 
                         <i class="fa-solid fa-chevron-right" onClick={() => setNumber(number + 1)} style={number === 2 ? { visibility: "hidden" } : { visibility: "visible" }}></i>
@@ -69,7 +79,7 @@ const ProductsDetails = ({ quantifyCart }) => {
                         </div>
                     </div>
                     <div className='container-description-details-addcard'>
-                       <button onClick={() => dispatch(getCart(productDetails))}>Add to cart <i class="fa-solid fa-cart-shopping"></i></button> 
+                       <button onClick={addCart}>Add to cart <i class="fa-solid fa-cart-shopping"></i></button> 
                     </div>
                     
                 </div>
@@ -83,12 +93,9 @@ const ProductsDetails = ({ quantifyCart }) => {
                     {
                         relatedProducts.map(related => (
                             <div key={related?.id} className="container-card" onClick={() => navigate(`/product/${related.id}`)}>
-                                <div className='container-img'>
-                                    <img src={related?.productImgs[0]} alt="" width={"50%"} height={"70%"}/>
-                                    <div className="img2">
-                                        <img src={related?.productImgs[1]} alt="" width={"50%"} height={"70%"} />
-                                    </div>
-                                    
+                                    <div className='container-img'>
+                                            <img className='container-img1' src={related?.productImgs[0]} alt="" width={"10%"}/>
+                                            <img className='container-img2' src={related?.productImgs[1]} alt="" width={"10%"} />
                                 </div>
                                 <div className='container-card-title'>
                                     <p>{related?.title}</p>
@@ -107,7 +114,7 @@ const ProductsDetails = ({ quantifyCart }) => {
                     }
                 </div>    
             </section>
-            
+            <CartSideBar quantify={quantify}/>
         </>
     );
 };

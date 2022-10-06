@@ -15,7 +15,7 @@ const Home = () => {
     const menuPrice = useSelector(state => state.menuprice);
     const menucategory = useSelector(state => state.menucategory);
     const products = useSelector(state => state.products)
-    const productsCart = useSelector(state => state.cart)
+
     const navigate = useNavigate()
     const [categories, setCtegories] = useState([]);
     const [productFiltered, setProductFilteres] = useState([]);
@@ -59,14 +59,14 @@ const Home = () => {
                 <div className='filter-category'>
                     <div className='filter-category-title' onClick={() => dispatch(menuCategories(!menucategory))}>
                         <p>Categories</p>
-                        <i class="fa-solid fa-chevron-down" style={menucategory === true ? {transform: 'rotate(180deg)'} : {transform: 'rotate(0deg)'}}></i>
+                        <i className="fa-solid fa-chevron-down" style={menucategory === true ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }}></i>
                     </div>
-                    <div className={`con-filter-category-item ${ menucategory ? 'is-active-categories' : 'con-filter-category-item'}`}>
+                    <div className={`con-filter-category-item ${menucategory ? 'is-active-categories' : 'con-filter-category-item'}`}>
 
                         {
                             categories.map(category => (
-                                <div className='filter-category-item'>
-                                    <p onClick={() => filterCategory(category.id)} key={category.id}>{category.name}</p>
+                                <div className='filter-category-item' key={category.id}>
+                                    <p onClick={() => filterCategory(category.id)} >{category.name}</p>
                                 </div>
                             ))
 
@@ -76,7 +76,7 @@ const Home = () => {
                 <div className='filter-price'>
                     <div className='filter-category-price' onClick={() => dispatch(menuPrices(!menuPrice))}>
                         <p>Price</p>
-                        <i class="fa-solid fa-chevron-down" style={menuPrice === true ? {transform: 'rotate(180deg)'} : {transform: 'rotate(0deg)'}}></i>
+                        <i className="fa-solid fa-chevron-down" style={menuPrice === true ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }}></i>
                     </div>
                     <div className={`filter-price-input-all ${menuPrice ? 'is-active-price' : ''}`}>
                         <div className='filter-price-input filter-price-input1'>
@@ -99,18 +99,15 @@ const Home = () => {
             <div className='container-search'>
                 <div className='filter-title'>
                     <input type="text" placeholder='What are you looking for?' value={searchValue} onChange={e => setSearchvalue(e.target.value)} />
-                    <button onClick={() => searchProducts()}><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button onClick={() => searchProducts()}><i className="fa-solid fa-magnifying-glass"></i></button>
                 </div>
                 <div className="container-grid">
                     {
                         productFiltered.map(product => (
                             <div key={product.id} className="container-card" onClick={() => navigate(`/product/${product.id}`)}>
                                 <div className='container-img'>
-                                    <img src={product.productImgs[0]} alt="" width={"50%"} height={"70%"} />
-                                    <div className="img2">
-                                        <img src={product.productImgs[1]} alt="" width={"50%"} height={"70%"} />
-                                    </div>
-
+                                            <img className='container-img1' src={product.productImgs[0]} alt="" width={"10%"}/>
+                                            <img className='container-img2' src={product.productImgs[1]} alt="" width={"10%"} />
                                 </div>
                                 <div className='container-card-title'>
                                     <p>{product.title}</p>
@@ -120,37 +117,9 @@ const Home = () => {
                                         <span>Price:</span>
                                         <p>${product.price}</p>
                                     </div>
-                                    <i class="fa-solid fa-cart-shopping" onClick={() => navigate(`/product/${product.id}`)}></i>
+                                    <i className="fa-solid fa-cart-shopping" onClick={() => navigate(`/product/${product.id}`)}></i>
                                 </div>
                             </div>
-                        ))
-                    }
-                </div>
-            </div>
-            <div className={`containe-cart ${menu ? 'is-active' : ''}`}>
-                <div className='title-cart'>
-                    <p>Carrito de compras</p>
-                </div>
-                <div className='container-items-cart'>
-                    {
-                        productsCart.map(productc => (
-                            <div key={productc.id} >
-                                <div className="container-item-cart-trash-category">
-                                    <p>{productc?.category.name}</p>
-                                    <i class="fa-solid fa-trash" onClick={() => dispatch(deleteItems(productc.id))}></i>
-                                </div>
-                                <div className='container-item-cart-titel'>
-                                    <p>{productc?.title}</p>
-                                </div>
-                                <div className='container-item-cart-quantify'>
-                                    <p>1</p>
-                                </div>
-                                <div className='container-item-cart-price'>
-                                    <spam>Total:</spam>
-                                    <p>{productc?.price}</p>
-                                </div>
-                            </div>
-
                         ))
                     }
                 </div>

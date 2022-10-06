@@ -11,7 +11,9 @@ import LoadingScreen from './Components/LoadingScreen'
 import {useDispatch, useSelector} from 'react-redux'
 import { getProductsThunk } from './store/slice/products.slice';
 import Footer from './Components/Footer'
-import Cart from './Components/Cart'
+import ProtectedRoutes from './Components/ProtectedRoutes';
+import CartSideBar from './Components/CartSideBar'
+import SingUp from './pages/SingUp'
 
 function App() {
 
@@ -26,13 +28,17 @@ function App() {
       <HashRouter>
         <MyNavbar/>
         {isLoading && <LoadingScreen/>}
+        <CartSideBar/>
         {/* <Cart/> */}
         <Routes>
-          <Route/>
+          <Route path="/login" element={<Logins />}/>
+          <Route path="/singup" element={<SingUp />}/>
           <Route path="/" element={<Home />}/>
           <Route path="/product/:id" element={<ProductsDetails />}/>
-          <Route path="/login" element={<Logins />}/>
-          <Route path="/purchases" element={<Purchases />}/>
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/purchases" element={<Purchases />}/>
+          </Route>
+
         </Routes>
         <Footer/>
       </HashRouter>

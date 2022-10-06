@@ -5,9 +5,9 @@ const Footer = () => {
         <footer>
             <p>© Academlo 2022</p>
             <div className='container-RRSS'>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-linkedin-in"></i>
-                <i class="fa-brands fa-youtube"></i>
+                <i className="fa-brands fa-instagram"></i>
+                <i className="fa-brands fa-linkedin-in"></i>
+                <i className="fa-brands fa-youtube"></i>
             </div>
             
         </footer>
