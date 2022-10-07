@@ -46,7 +46,7 @@ const ProductsDetails = ({ quantifyCart }) => {
                     <div className='container-description-carrusel-box1'>
                         <i class="fa-solid fa-chevron-left" onClick={() => setNumber(number - 1)} style={number === 0 ? { visibility: "hidden" } : { visibility: "visible" }}></i>
                         <div className='container-img-carrusel'>
-                            <img src={productDetails?.productImgs[number]} alt="" width={"250px"} /* height={"370px"} */ />
+                            <img src={productDetails?.productImgs[number]} alt="" width={"180px"} /* height={"370px"} */ />
                         </div>
 
                         <i class="fa-solid fa-chevron-right" onClick={() => setNumber(number + 1)} style={number === 2 ? { visibility: "hidden" } : { visibility: "visible" }}></i>
@@ -81,7 +81,6 @@ const ProductsDetails = ({ quantifyCart }) => {
                     <div className='container-description-details-addcard'>
                        <button onClick={addCart}>Add to cart <i class="fa-solid fa-cart-shopping"></i></button> 
                     </div>
-                    
                 </div>
 
             </section>
@@ -105,7 +104,7 @@ const ProductsDetails = ({ quantifyCart }) => {
                                         <span>Price:</span>
                                         <p>${related?.price}</p>
                                     </div>
-                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    <i class="fa-solid fa-cart-shopping" onClick={addCart}></i>
                                 </div>
                                 
                                 

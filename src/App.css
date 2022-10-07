@@ -7,7 +7,19 @@ body {
   width: 100%;
 }
 
-/* @media screen and (min-width:1024px) {
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+
+/* :root {
+  --principal: #f85555;
+}
+
+body {
+  color: black;
+  width: 100%;
+}
+
+@media screen and (min-width:1024px) {
   nav {
     width: 100%;
     height: 70px;
@@ -77,29 +89,37 @@ body {
 
   .container-img {
     height: 230px;
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center; 
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     transition: 1s;
-    z-index: 1;
-    position: relative;
   }
 
-  .container-img img{
-    aspect-ratio: 0.8;
+  .container-img .container-img1{
+    aspect-ratio: 0.7;
+    visibility: visible;
+    position: absolute;
+    z-index: -1;
+    opacity: 100;
+  }
+
+  .container-img .container-img2{
+    position: absolute;
+    visibility: hidden;
+    aspect-ratio: 0.7;
+    z-index: -1;
   }
 
   @keyframes img1 {
     from {
-      visibility: hidden;
-      z-index: -1;
+      visibility: visible;
       opacity: 100%;
     }
 
     to {
-      visibility: visible;
-      z-index: 1;
+      visibility: hidden;
       opacity: 0%;
     }
   }
@@ -107,33 +127,20 @@ body {
   @keyframes img2 {
     from {
       visibility: hidden;
-      z-index: -1;
       opacity: 0%;
     }
 
     to {
       visibility: visible;
-      z-index: 1;
       opacity: 100%;
     }
   }
 
-  .img2 img {
-    z-index: -1;
-    position: absolute;
-    visibility: hidden;
-    top: 40px;
-    left: 50px;
-    aspect-ratio: 0.8;
-  }
-
-  .container-img:hover .img2 img {
+  .container-img:hover .container-img2{
     animation: img2 0.8s forwards ease-out;
   }
 
-  .container-img:hover img {
-    z-index: -1;
-    visibility: hidden;
+  .container-img:hover .container-img1{
     animation: img1 0.5s forwards ease-out;
   }
 
@@ -200,12 +207,10 @@ body {
   .category {
     display: flex;
     flex-direction: column;
-    position: sticky;
     top: 70px ;
     left: 0;
     width: 25%;
     padding: 30px 30px 0 20px;
-    z-index: 1;
     height: 550px;
   }
 
@@ -689,17 +694,25 @@ body {
   .container-total-btn{
     position: absolute;
     bottom: 0;
-    width: 100%;
-    padding: 15px 20px;
-    background: #f85555;
+    width: 85%;
+    padding-bottom: 25px;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    background: white;
   }
 
   .container-total{
-
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
   }
 
-  .container-btn{
+  .container-btn button{
     width: 100%;
+    text-decoration: none;
+    border: none;
+    background: var(--principal);
+    color: white;
+    font-weight: 6000;
   }
 
   .container-items-box-cart{
@@ -815,7 +828,172 @@ body {
     font-weight: 600;
     color: black;
   }
-} */
+
+  .filter-category-title i{
+    z-index: -1;
+  }
+
+  .filter-category-price i{
+    z-index: -1;
+  }
+
+  .move-container-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 570px;
+    background: rgba(177, 175, 175, 0.1);
+  }
+
+  .container-form{
+    padding: 25px;
+    width: 400px;
+    margin: 15px;
+    background: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    position: absolute;
+      visibility: visible;
+  }
+
+  .container-form-title h2{
+    margin: 0;
+    font-size: 15px;
+    padding-bottom: 25px;
+    text-align: center;
+  }
+
+  .container-form-testdata{
+    background: #d8f5fd;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .container-form-testdata h3{
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    margin: 0;
+  }
+
+  .container-form-testdata p{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 0 15px;
+  }
+
+  form label{
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  form input{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 2px 10px;
+  }
+
+  .input{
+    margin-bottom: 25px;
+  }
+
+  form button{
+    border: none;
+    background: var(--principal);
+    color: white;
+    font-weight: 600;
+  cursor: pointer;
+  }
+
+  .dont-account{
+    padding-top: 30px;
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .dont-account p{
+    margin: 0;
+  }
+
+  .dont-account span{
+    margin: 0;
+    text-decoration: none;
+    color: #32acce;
+    cursor: pointer;
+  }
+
+  .container-form-sinUp{
+      padding: 25px;
+      width: 400px;
+      background: white;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 10px;
+    }
+
+    .Already-account{
+      padding-top: 15px;
+      width: 100%;
+      font-size: 13px;
+    }
+
+    .Already-account p{
+      margin: 0;
+    }
+  
+    .Already-account span{
+      margin: 0;
+      text-decoration: none;
+      color: #32acce;
+      cursor: pointer;
+    }
+
+    .container-lofin{
+      padding: 25px;
+      width: 350px;
+      margin: 15px;
+      height: 200px;
+      background: white;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 10px;
+      position: absolute;
+      visibility: hidden;
+      gap: 5px;
+      position: absolute;
+      visibility: hidden;
+    }
+
+    .container-lofin i{
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid #d8f5fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      color: #0d3d4b;
+    }
+
+    .container-lofin p{
+      margin: 0;
+    }
+
+    .container-lofin span{
+      margin: 0;
+      cursor: pointer;
+      color: #32acce;
+    }
+}
 
 @media screen and (min-width:1380px) {
   nav {
@@ -884,7 +1062,7 @@ body {
     font-size: 12px;
     padding: 5px 10px;
   }
-/* trasladar a 1048px */
+/* trasladar a 1048px ---
   .container-img {
     height: 230px;
     width: 100%;
@@ -941,7 +1119,7 @@ body {
   .container-img:hover .container-img1{
     animation: img1 0.5s forwards ease-out;
   }
-/* hasta aqi */
+/* hasta aqi ---
   .container-card-title {
     width: 100%;
     display: flex;
@@ -1492,9 +1670,9 @@ body {
     margin: 0;
   }
 
-  /* .container-items-cart {
+  .container-items-cart {
     padding: 15px 20px;
-  } */
+  }
 
   .container-items-box-cart{
     padding: 15px 20px;
@@ -1613,14 +1791,13 @@ body {
   .fa-trash {
     cursor: pointer;
   }
-/* 
   .container-form{
     width: 100%;
     height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
-  } */
+  }
 
   form{
     width: 100%;
@@ -1629,7 +1806,7 @@ body {
     padding-top: 15px;
   }
 
-  /* Cambios para el resto de archivos */
+  /* Cambios para el resto de archivos --
 
   .filter-category-title i{
     z-index: -1;
@@ -1767,8 +1944,8 @@ body {
       flex-direction: column;
       justify-content: center;
       border-radius: 10px;
-      /* position: absolute;
-      visibility: hidden; */
+       position: absolute;
+      visibility: hidden;
       gap: 5px;
       position: absolute;
       visibility: hidden;
@@ -1798,7 +1975,7 @@ body {
 }
 
 
-/* ---------------------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------------------------- 
 
 @media screen and (min-width:767px) and (max-qidth:1023px) {
   nav {
@@ -3074,4 +3251,4 @@ body {
   .fa-trash {
     cursor: pointer;
   }
-}
+} */

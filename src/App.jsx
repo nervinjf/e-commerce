@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Purchases from './pages/Purchases'
 import MyNavbar from './Components/MyNavbar'
 import LoadingScreen from './Components/LoadingScreen'
+import './styles/style1024.css'
 import {useDispatch, useSelector} from 'react-redux'
 import { getProductsThunk } from './store/slice/products.slice';
 import Footer from './Components/Footer'

@@ -4,7 +4,7 @@ import { getProductsThunk } from '../store/slice/products.slice';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
-import { deleteItems } from '../store/slice/cart.slice';
+import { addCartThunk, deleteItems } from '../store/slice/cart.slice';
 import { menuCategories } from '../store/slice/menucategory.slice';
 import { menuPrices } from '../store/slice/menuprice.slice';
 
@@ -51,6 +51,13 @@ const Home = () => {
         setProductFilteres(filteredPrice)
     }
 
+    const addCart = () => {
+        const cart = {
+            "id": id,
+            "quantity": 1
+        }
+        dispatch(addCartThunk(cart));
+    }
 
     return (
         <div className='flex-home'>
@@ -117,7 +124,7 @@ const Home = () => {
                                         <span>Price:</span>
                                         <p>${product.price}</p>
                                     </div>
-                                    <i className="fa-solid fa-cart-shopping" onClick={() => navigate(`/product/${product.id}`)}></i>
+                                    <i className="fa-solid fa-cart-shopping" onClick={addCart}></i>
                                 </div>
                             </div>
                         ))

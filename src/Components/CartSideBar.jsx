@@ -15,6 +15,8 @@ const CartSideBar = ({handleClose, show, quantify}) => {
         dispatch(getCartThunk())
     }, [])
 
+    console.log (itemCart)
+
     return (
         <Offcanvas show={show} onHide={handleClose} placement='end'>
         <Offcanvas.Header closeButton>
@@ -44,6 +46,7 @@ const CartSideBar = ({handleClose, show, quantify}) => {
 
                 ))
               }
+              </div>
               <div className='container-total-btn'>
                   <div className='container-total'>
                     <p>Total:</p>
@@ -52,8 +55,6 @@ const CartSideBar = ({handleClose, show, quantify}) => {
                   <div className='container-btn'>
                     <button onClick={() => dispatch(purchasesCartThunk())}>Checkout</button>
                   </div>
-                  
-              </div>
             </div>
             
             </div>
