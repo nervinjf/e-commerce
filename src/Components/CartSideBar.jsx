@@ -22,9 +22,7 @@ const CartSideBar = ({handleClose, show, quantify}) => {
         newTotal += Number(product.price) * product.productsInCart.quantity;
       });
       setTotal(newTotal)
-    },[])
-
-    console.log (total)
+    }, [itemCart])
 
     return (
         <Offcanvas show={show} onHide={handleClose} placement='end'>
