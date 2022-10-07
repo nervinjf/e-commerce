@@ -10,12 +10,13 @@ const MyNavbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const menu = useSelector(state => state.menu);
+  const itemCart = useSelector(state => state.cart)
   
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  
+  console.log(itemCart)
 
   return (
     <>
@@ -24,7 +25,12 @@ const MyNavbar = () => {
         <div className='container-i-nav'>
           <i className="fa-solid fa-user" to="/login" onClick={() => navigate(`/login`)}></i>
           <i className="fa-solid fa-box-archive" onClick={() => navigate(`/purchases`)}></i>
-          <i className="fa-solid fa-cart-shopping" onClick={handleShow}></i>
+          <i className="fa-solid fa-cart-shopping" onClick={handleShow}>
+            <div className='testtt'>
+              <p>{itemCart.length}</p>
+            </div>
+            
+          </i>
 
         </div>
       </nav>
