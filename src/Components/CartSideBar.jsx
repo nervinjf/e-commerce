@@ -13,7 +13,7 @@ const CartSideBar = ({handleClose, show, quantify}) => {
     const [total, setTotal] =   useState(0);
 
     useEffect(() =>{
-        dispatch(getCartThunk())
+        dispatch(getCartThunk());
     }, [])
 
     useEffect(() => {
