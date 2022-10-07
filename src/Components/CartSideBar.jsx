@@ -1,5 +1,5 @@
 import { compose } from '@reduxjs/toolkit';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 // import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,12 +10,21 @@ const CartSideBar = ({handleClose, show, quantify}) => {
 
     const dispatch = useDispatch();
     const itemCart = useSelector(state => state.cart)
+    const [total, setTotal] =   useState(0);
 
     useEffect(() =>{
         dispatch(getCartThunk())
     }, [])
 
-    console.log (itemCart)
+    useEffect(() => {
+      let newTotal = 0;
+      itemCart.forEach(product => {
+        newTotal += Number(product.price) * product.productsInCart.quantity;
+      });
+      setTotal(newTotal)
+    },[])
+
+    console.log (total)
 
     return (
         <Offcanvas show={show} onHide={handleClose} placement='end'>
@@ -40,7 +49,7 @@ const CartSideBar = ({handleClose, show, quantify}) => {
                     </div>
                     <div className='container-item-cart-price'>
                       <span>Total:</span>
-                      <p>${productc?.price*productc?.productsInCart?.quantity}</p>
+                      <p>${productc?.price * productc?.productsInCart?.quantity}</p>
                     </div>
                   </div>
 
@@ -50,7 +59,7 @@ const CartSideBar = ({handleClose, show, quantify}) => {
               <div className='container-total-btn'>
                   <div className='container-total'>
                     <p>Total:</p>
-                    <span>${(itemCart?.reduce((amount, item) => Number(item.price) + amount, 0))}</span>
+                    <span>$ {total}</span>
                   </div>
                   <div className='container-btn'>
                     <button onClick={() => dispatch(purchasesCartThunk())}>Checkout</button>
