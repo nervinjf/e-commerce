@@ -12,7 +12,7 @@ const SingUp = () => {
     const [active, setActive] = useState('');
     
     const SingUp = (data) => {
-        axios.post(`https://ecommerce-api-react.herokuapp.com/api/v1/users`, data)
+        axios.post(`https://e-commerce-api.academlo.tech/api/v1/users`, data)
             .then(res => setActive(res.data))
             .catch(error => error.response)
             .finally(() => navigate("/login"));

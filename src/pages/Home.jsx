@@ -24,7 +24,7 @@ const Home = () => {
     const [price1, setPrice1] = useState("");
 
     useEffect(() => {
-        axios.get('https://ecommerce-api-react.herokuapp.com/api/v1/products/categories')
+        axios.get('https://e-commerce-api.academlo.tech/api/v1/products/categories')
             .then(res => setCtegories(res.data.data.categories))
     }, [])
 

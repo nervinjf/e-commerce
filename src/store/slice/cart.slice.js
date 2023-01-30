@@ -25,21 +25,21 @@ export const cartSlice = createSlice({
 
 export const getCartThunk = () => (dispatch) => {
     dispatch(loading(true));
-    axios.get('https://ecommerce-api-react.herokuapp.com/api/v1/cart', getConfig())
+    axios.get('https://e-commerce-api.academlo.tech/api/v1/cart', getConfig())
         .then(res => dispatch(setCart(res.data.data.cart.products)))
         .finally(() => dispatch(loading(false)));
 }
 
 export const addCartThunk = (cart) => (dispatch) => {
     dispatch(loading(true));
-    axios.post(`https://ecommerce-api-react.herokuapp.com/api/v1/cart`, cart, getConfig())
+    axios.post(`https://e-commerce-api.academlo.tech/api/v1/cart`, cart, getConfig())
         .then(() => dispatch(getCartThunk()))
         .finally(() => dispatch(loading(false)));
 }
 
 export const purchasesCartThunk = () => (dispatch) => {
     dispatch(loading(true));
-    axios.post(`https://ecommerce-api-react.herokuapp.com/api/v1/purchases`, {}, getConfig())
+    axios.post(`https://e-commerce-api.academlo.tech/api/v1/purchases`, {}, getConfig())
         .then(() => dispatch(setCart([])))
         .finally(() => dispatch(loading(false)));
 }
